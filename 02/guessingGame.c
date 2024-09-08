@@ -1,5 +1,5 @@
 /*
- * guessingGame.v
+ * guessingGame.c
  *
  * A binary search game that prompts the user to gues a number
  * The computer then guesses the number through a series of hints
