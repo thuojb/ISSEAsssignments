@@ -21,8 +21,7 @@
 
 int main ()
 {
-	int lower_bound = 1, upper_bound = GUESS_RANGE, median, attemptCount = 0;
-	
+	int lower_bound = 1, upper_bound = GUESS_RANGE, median, attemptCount = 0;	
 	char user_response;
 
 	printf("Think of a number between %d and %d,\n"
@@ -32,7 +31,7 @@ int main ()
 	while (lower_bound <= upper_bound)
 	{
 		median = (upper_bound + lower_bound) / 2;
-		attemptCount++; // increment the number of attempts at every iteration of the loop
+		attemptCount++;
 
 		printf("I guess %d \n"
 			"If the answer is HIGHER than my guess, enter 'H':\n"
@@ -42,7 +41,7 @@ int main ()
 
 		scanf(" %c", &user_response);
 
-		// Switch cases for different user responses
+
 		switch (user_response)
 		{
 			case 'H':
