@@ -1,6 +1,6 @@
 /*
- *
- *
+ * author john bosco thuo
+ * isse assignment 03
  *
  */
 
@@ -20,7 +20,6 @@
 *   bool type
 * author: john bosco thuo
 */
-
 
 bool is_prefix(const char *prefix, const char *str) {
     // if 'prefix' is an empty string, returns true, "" is a prefix of any str ""
@@ -123,13 +122,6 @@ void reverse_in_place (char *str)
         reverse_helper(str, end);
 }
 
-
-
-// Helper function for test cases to compate strings
-bool strings_equal(const char *a, const char *b) {
-    return strcmp(a, b) == 0;
-}
-
 /**
  * function reverse_by_word to reverse each word in the string str in place.
  * using the `reverse_helper` function to reverse characters within each word.
@@ -186,8 +178,8 @@ void reverse_by_word(char *str)
  *         otherwise, -1 if `substr` is not found.
  * 
  * @details
- * 1. the function calculates the lengths of `str` and `substr`.
- * 2. it then iterates through `str` to find the last occurrence of `substr`.
+ * 1. calculates the lengths of `str` and `substr`.
+ * 2. iterates through `str` to find the last occurrence of `substr`.
  *    - for each position in `str`, it uses `is_prefix` to check if `substr`
  *      matches the current position in `str`.
  *    - `is_prefix` checks if `substr` is a prefix of the substr starting
@@ -223,7 +215,7 @@ int remove_last_substr(char *str, const char *substr)
 }
 
 /**
- * Helper function to check if a character is in the set of characters to remove.
+ * helper function to check if a character is in the set of characters to remove.
  *
  * @param c The character to check.
  * @param chars_to_remove Pointer to a string of characters to remove.
@@ -272,46 +264,42 @@ void strip_chars(char *str, const char *chars_to_remove) {
  * to test each of the above functions.
  * where necessary, a helper function is defined.
  *
- */
-
-/**
  * function test_is_prefix tests the is_prefix function.
- *
  * the function tests various cases to check if the `is_prefix` function performs correctly in identifying
  * whether a given prefix is a prefix of the corresponding string.
  */
 void test_is_prefix(void)
 {
     const char *prefixes[] = {
-        "",                          // prefix is empty string
-        "C",                         // prefix is "C"
-        "Carnegie",                  // prefix is "Carnegie"
-        "Carnegie Mellon",           // prefix is "Carnegie Mellon"
-        "Cab",                       // prefix is "Cab"
-        "car",                       // prefix is "car" (case-sensitive)
-        "C",                         // prefix is "C" (empty string as string)
-        ""                          // prefix is empty string (non-empty string)
+        "",
+        "C",
+        "Carnegie",
+        "Carnegie Mellon",
+        "Cab",
+        "car",
+        "C",
+        ""
     };
     const char *strings[] = {
-        "",                          // String is empty
-        "Carnegie Mellon",           // String is "Carnegie Mellon"
+        "",
+        "Carnegie Mellon",
         "Carnegie Mellon",           
         "Carnegie Mellon",           
         "Carnegie Mellon",           
         "Carnegie Mellon",
-        "",                          // String is empty
-        "Carnegie Mellon"            //
+        "",
+        "Carnegie Mellon"
     };
 
     bool expected[] = {
-        true,   // "" is a prefix of ""
-        true,   // "C" is a prefix of "Carnegie Mellon"
-        true,   // "Carnegie" is a prefix of "Carnegie Mellon"
-        true,   // "Carnegie Mellon" is a prefix of "Carnegie Mellon"
-        false,  // "Cab" is not a prefix of "Carnegie Mellon"
-        false,  // "car" is not a prefix of "Carnegie Mellon" (case-sensitive)
-        false,  // "" cannot be a prefix of any non-empty string
-        true    // "" is a prefix of any string
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
     };
 
     int num_tests = sizeof(expected) / sizeof(expected[0]);
@@ -336,6 +324,20 @@ void test_is_prefix(void)
     }
     printf("Testing is_prefix done\n");
 }
+
+/**
+ * helper function strings_equal for test cases to compare strings for equality
+ * @params chara a and b
+ * @param a The first string to compare.
+ * @param b The second string to compare.
+ *
+ * @return true if the strings are equal, false otherwise.
+ */
+
+bool strings_equal(const char *a, const char *b) {
+    return strcmp(a, b) == 0;
+}
+
 
 
 /**
