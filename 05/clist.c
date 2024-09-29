@@ -343,9 +343,14 @@ void CL_join(CList list1, CList list2)
 void CL_reverse(CList list)
 {
   assert(list);
+  
+  if (list->length <= 1) return; // do not iterate if empty or one item
+  
   struct _cl_node *prev = NULL;
   struct _cl_node *current = list->head;
-  struct _cl_node *next;
+  struct _cl_node *next = NULL;
+  
+  //struct _cl_node *start = list->head; 
   
   while(current) {
     next = current->next;
@@ -353,6 +358,8 @@ void CL_reverse(CList list)
     prev = current;
     current = next;
   }
+
+//  list->head->next = prev;
   list->head = prev;
 }
 
