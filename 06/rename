@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# function to print usage
+usage() {
+    echo "Usage: $0 [OPTIONS] PATTERN REPL [DIR [DIR ...]]"
+    echo "Performs a batch renaming of files based on a POSIX extended regular expression."
+    echo "Options can be one or more of:"
+    echo "  -h | --help     Print this usage message and exit"
+    echo "  -s | --show     Show what would be renamed without actually renaming."
+    exit 1
+}
+
+# default values
+show=false
+dirs=()
+
+# parsing options
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -h|--help)
+            usage
+            ;;
+        -s|--show)
+            show=true
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+# ensures at least a pattern and replacement
+if [[ $# -lt 2 ]]; then
+    usage
+fi
+
+pattern=$1
+replacement=$2
+shift 2
+
+# collect directories or use current directory
+if [[ $# -gt 0 ]]; then
+    dirs=("$@")
+else
+    dirs=(".")
+fi
+
+# Function to rename files
+rename_files() {
+    local dir="$1"
+    
+    # Check if the directory exists
+    if [[ ! -d "$dir" ]]; then
+        echo "Directory $dir does not exist. Skipping."
+        return
+    fi
+
+    cd "$dir" || return
+    for file in *; do
+        # skip if it is not a regular file
+        if [[ ! -f "$file" ]]; then
+            continue
+        fi
+
+        new_name=$(echo "$file" | sed -Ee "s/$pattern/$replacement/g")
+        
+        if [[ "$new_name" != "$file" ]]; then
+            if $show; then
+                echo "$file ==> $new_name"
+            else
+                mv "$file" "$new_name"
+            fi
+        fi
+    done
+}
+
+# iterating over directories and rename files
+for dir in "${dirs[@]}"; do
+    rename_files "$dir"
+done
