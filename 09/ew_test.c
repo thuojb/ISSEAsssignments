@@ -3,7 +3,7 @@
  * 
  * Tests for ExprWhizz functions
  *
- * Author: <your name here>
+ * Author: John Bosco Thuo
  */
 
 #include <stdio.h>

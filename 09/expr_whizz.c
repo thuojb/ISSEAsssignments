@@ -5,7 +5,7 @@
  * the operators + - * / % ^, and unary minus. Values are held as
  * doubles.
  *
- * Author: <your name here>
+ * Author: John Bosco Thuo
  */
 
 #include <stdio.h>

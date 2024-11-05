@@ -3,7 +3,7 @@
  * 
  * Functions to tokenize and manipulate lists of tokens
  *
- * Author: <your name here>
+ * Author: John Bosco Thuo
  */
 
 #include <stdio.h>
@@ -13,20 +13,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "clist.h"
 #include "tokenize.h"
 #include "token.h"
-#include "clist.h"
-
-// Forward-declare the CList type, the associated _clist struct, and the _cl_node struct
-struct _cl_node {
-  Token element;
-  struct _cl_node *next;
-};
-
-struct _clist {
-  struct _cl_node *head;
-  int length;
-};
 
 // Documented in .h file
 const char *TT_to_str(TokenType tt)
@@ -50,66 +39,126 @@ const char *TT_to_str(TokenType tt)
     return "CLOSE_PAREN";
   case TOK_END:
     return "(end)";
-  case TOK_INVALID:
-    return "INVALID";
-  default:
-    return "UNKNOWN";
   }
+
+  __builtin_unreachable();
 }
 
+// Helper function to check if a character is a valid operator
+static bool is_operator(char c) {
+  return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+}
+
+// Helper function to check if a character is a valid parenthesis
+static bool is_paren(char c) {
+  return c == '(' || c == ')';
+}
+
+// Helper to get token type from operator char
+static TokenType char_to_token_type(char c) {
+  switch(c) {
+    case '+': return TOK_PLUS;
+    case '-': return TOK_MINUS;
+    case '*': return TOK_MULTIPLY;
+    case '/': return TOK_DIVIDE;
+    case '^': return TOK_POWER;
+    case '(': return TOK_OPEN_PAREN;
+    case ')': return TOK_CLOSE_PAREN;
+    default: return TOK_END;
+  }
+}
 
 // Documented in .h file
 CList TOK_tokenize_input(const char *input, char *errmsg, size_t errmsg_sz)
 {
   CList tokens = CL_new();
-
-
-  //
-  // TODO: Add your code here
-  //
+  const char *p = input;
+  char *endptr;
+  Token tok;
+  
+  // Skip leading whitespace
+  while (isspace(*p)) p++;
+  
+  // Process each character
+  while (*p) {
+    if (isspace(*p)) {
+      p++;
+      continue;
+    }
+    
+    // Handle numbers
+    if (isdigit(*p) || *p == '.') {
+      // Use strtod to parse numbers including scientific notation
+      tok.value = strtod(p, &endptr);
+      
+      // Check for invalid numbers
+      if (p == endptr) {
+        snprintf(errmsg, errmsg_sz, "Position %ld: Illegal numeric value", p - input + 1);
+        CL_free(tokens);
+        return NULL;
+      }
+      
+      tok.type = TOK_VALUE;
+      CL_append(tokens, tok);
+      p = endptr;
+      continue;
+    }
+    
+    // Handle operators and parentheses
+    if (is_operator(*p) || is_paren(*p)) {
+      tok.type = char_to_token_type(*p);
+      tok.value = 0;
+      CL_append(tokens, tok);
+      p++;
+      continue;
+    }
+    
+    // Invalid character
+    snprintf(errmsg, errmsg_sz, "Position %ld: unexpected character %c", p - input + 1, *p);
+    CL_free(tokens);
+    return NULL;
+  }
 
   return tokens;
 }
 
-
-
 // Documented in .h file
 TokenType TOK_next_type(CList tokens)
 {
-  if (tokens->length == 0) {
+  if (CL_length(tokens) == 0)
     return TOK_END;
-  }
-
-  return tokens->head->element.type;
+  return CL_nth(tokens, 0).type;
 }
-
 
 // Documented in .h file
 Token TOK_next(CList tokens)
 {
-  if (tokens->length == 0) {
-    Token invalid_token = { .type = TOK_INVALID, .value = 0 };
-    return invalid_token;
+  if (CL_length(tokens) == 0) {
+    Token end_token = {TOK_END, 0};
+    return end_token;
   }
-
-  return tokens->head->element;
+  return CL_nth(tokens, 0);
 }
-
 
 // Documented in .h file
 void TOK_consume(CList tokens)
 {
-  if (tokens->length > 0) {
+  if (CL_length(tokens) > 0)
     CL_pop(tokens);
-  }
 }
 
-
-static void TOK_print_helper(int pos, Token element, void* data) {
-    printf("Token %d: %s, Value: %f\n", pos, TT_to_str(element.type), element.value);
+// Helper function for TOK_print
+static void print_token(int pos, CListElementType elem, void *data)
+{
+  Token tok = elem;
+  if (tok.type == TOK_VALUE)
+    printf("Token %d: %s(%g)\n", pos, TT_to_str(tok.type), tok.value);
+  else
+    printf("Token %d: %s\n", pos, TT_to_str(tok.type));
 }
 
 // Documented in .h file
-void TOK_print(CList tokens) {
-    CL_foreach(tokens, TOK_print_helper, NULL);
+void TOK_print(CList tokens)
+{
+  CL_foreach(tokens, print_token, NULL);
 }
