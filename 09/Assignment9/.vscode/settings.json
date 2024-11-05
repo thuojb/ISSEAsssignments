@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "clist.h": "c",
+        "assert.h": "c",
+        "token.h": "c",
+        "tokenize.h": "c",
+        "stdio.h": "c"
+    }
+}
