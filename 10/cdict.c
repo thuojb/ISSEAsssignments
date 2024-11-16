@@ -4,7 +4,7 @@
  * Dictionary based on a hash table utilizing open addressing to
  * resolve collisions.
  *
- * Author: <your name here>
+ * Author: John Bosco Thuo
  */
 #include <stdio.h>
 #include <string.h>
