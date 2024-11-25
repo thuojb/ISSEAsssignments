@@ -40,24 +40,26 @@ void read_input(WordIndex *index, int *word_count, FILE *fin) {
                 if (word_len < MAX_WORD_LENGTH - 1) {
                     word[word_len++] = tolower(*ptr);
                 }
-            } else {
+	    }
+	    else 
+	    {
                 if (word_len > 0) {
                     word[word_len] = '\0';
 
-                    if (strlen(word) > MAX_WORD_LENGTH - 1) {
-                        fprintf(stderr, "Word '%s' exceeds maximum length of 20 characters\n", word);
-                        exit(1);
-                    }
-
-                    if (!is_common_word(word)) {
-                        if (add_word(index, word_count, word, line_num) == -1) {
-                            fprintf(stderr, "Exceeded unique words limit\n");
-                            exit(1);
-                        }
-                    }
-                    word_len = 0; // Reset for next word
+                if (strlen(word) > MAX_WORD_LENGTH - 1) {
+                    fprintf(stderr, "Word '%s' exceeds maximum length of 20 characters\n", word);
+                    exit(1);
                 }
-            }
+
+                if (!is_common_word(word)) {
+                    if (add_word(index, word_count, word, line_num) == 1) {
+                        fprintf(stderr, "Exceeded unique words limit\n");
+                        exit(1);
+		    }
+                }
+                word_len = 0; // Reset for next word
+         
+    		}
             ptr++;
         }
 

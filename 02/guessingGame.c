@@ -52,7 +52,7 @@ int main ()
 				if (lower_bound > GUESS_RANGE) {
 					printf("Number is out of upper bound range\n"
 						"Program exiting\n");
-					return 1; // exits and returns control to program with a code 1
+					// return 1; // exits and returns control to program with a code 1
 				}
 				break;
 			// If the number is lower, this case lowers the upper bound, then
@@ -63,7 +63,7 @@ int main ()
 				if (upper_bound < 1) {
 					printf("Out of lower bound range\n"
 						"Program Exiting\n");
-					return 1; // exits and returns control to program with a code 1
+					// return 1; // exits and returns control to program with a code 1
 				}
 				break;
 
@@ -84,7 +84,6 @@ int main ()
 		// To check for inconsistent inputs
 		if (lower_bound > upper_bound) {
 			printf("Inconsistent input, program is exiting now\n");
-	 		return 1;
 		}
 	}
 }

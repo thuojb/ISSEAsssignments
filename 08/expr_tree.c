@@ -29,7 +29,7 @@ struct _expr_tree_node {
  * Calculate the depth of an expression tree
  *
  * Parameters:
-/*
+ *
  * Convert an ExprNodeType into a printable character
  *
  * Parameters:
