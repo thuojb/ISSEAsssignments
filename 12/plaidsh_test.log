@@ -1,102 +1,0 @@
-Welcome to Plaid Shell!
-[?2004h[01;31m#?[00;39m 
-[?2004l[?2004h[01;31m#?[00;39m     
-[?2004l[?2004h[01;31m#?[00;39m   \  
-[?2004l : Command not found
-Child 808898 exited with status 2
-[?2004h[01;31m#?[00;39m pwd
-[?2004l/home/jthuo/assignments/12
-[?2004h[01;31m#?[00;39m ls --color
-[?2004l [0m[01;32mMakefile[0m                  [01;32mpipeline.c[0m   [01;32mplaidsh_test.log[0m      [01;32mtoken.h[0m
-[01;34m'Plaid Shell Playground'[0m   [01;32mpipeline.h[0m   [01;32mplaidsh_test.py[0m       [01;32mtokenize.c[0m
- [01;32moutput.txt[0m                pipeline.o   [01;32mps_test[0m               [01;32mtokenize.h[0m
- [01;32mparse.c[0m                   [01;32mplaidsh[0m      [01;32mps_test.c[0m             tokenize.o
- [01;32mparse.h[0m                   [01;32mplaidsh.c[0m    ps_test.o
- parse.o                   plaidsh.o    [01;32msetup_playground.sh[0m
-[?2004h[01;31m#?[00;39m /home/jthuo/assignments/12/setup_playground.sh
-[?2004lPlaid Shell playground created
-[?2004h[01;31m#?[00;39m cd Plaid\ Shell\ Playground
-[?2004l[?2004h[01;31m#?[00;39m pwd
-[?2004l/home/jthuo/assignments/12/Plaid Shell Playground
-[?2004h[01;31m#?[00;39m ls
-[?2004l README  'best sitcoms.txt'  'seven dwarfs.txt'   shells.txt
-[?2004h[01;31m#?[00;39m ls *.txt
-[?2004l'best sitcoms.txt'  'seven dwarfs.txt'	 shells.txt
-[?2004h[01;31m#?[00;39m echo $PATH
-[?2004l$PATH
-[?2004h[01;31m#?[00;39m author
-[?2004lJohn Bosco Thuo
-[?2004h[01;31m#?[00;39m author | sed -e "s/^/Written by /"
-[?2004lauthor: Command not found
-Child 808918 exited with status 2
-[?2004h[01;31m#?[00;39m grep Happy *.txt
-[?2004lbest sitcoms.txt:Happy Days
-seven dwarfs.txt:Happy
-[?2004h[01;31m#?[00;39m cat "best sitcoms.txt" | grep Seinfeld
-[?2004lSeinfeld
-[?2004h[01;31m#?[00;39m cat "best sitcoms.txt"|grep Seinfeld|wc -l
-[?2004l1
-[?2004h[01;31m#?[00;39m sed -ne "s/The Simpsons/I Love Lucy/p" < best\ sitcoms.txt > output
-[?2004l[?2004h[01;31m#?[00;39m ls -l
-[?2004ltotal 20
--rw-rw---- 1 jthuo jthuo  64 Dec 12 12:13  README
--rw-rw---- 1 jthuo jthuo 142 Dec 12 12:13 'best sitcoms.txt'
--rw-rw---- 1 jthuo jthuo  12 Dec 12 12:13  output
--rw-rw---- 1 jthuo jthuo  45 Dec 12 12:13 'seven dwarfs.txt'
--rw-rw---- 1 jthuo jthuo  25 Dec 12 12:13  shells.txt
-[?2004h[01;31m#?[00;39m cat output
-[?2004lI Love Lucy
-[?2004h[01;31m#?[00;39m this is not a command
-[?2004lthis: Command not found
-Child 808947 exited with status 2
-[?2004h[01;31m#?[00;39m echo Hello > /usr/bin/cant_write
-[?2004l/usr/bin/cant_write: Permission denied
-[?2004h[01;31m#?[00;39m cd
-[?2004l[?2004h[01;31m#?[00;39m pwd
-[?2004l/home/jthuo
-[?2004h[01;31m#?[00;39m cd /home/jthuo/assignments/12
-[?2004l[?2004h[01;31m#?[00;39m pwd
-[?2004l/home/jthuo/assignments/12
-[?2004h[01;31m#?[00;39m cd ~
-[?2004l[?2004h[01;31m#?[00;39m pwd
-[?2004l/home/jthuo
-[?2004h[01;31m#?[00;39m echo "Operator could you help me place this call?"
-[?2004lOperator could you help me place this call?
-[?2004h[01;31m#?[00;39m seq 10 | wc"-l"
-[?2004l10
-[?2004h[01;31m#?[00;39m seq 10 | wc"-l"[C[C[Cecho "Operator could you help me place this call?"
-[?2004lOperator could you help me place this call?
-[?2004h[01;31m#?[00;39m env|grep PATH
-[?2004lPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-[?2004h[01;31m#?[00;39m echo Hello World | cat -n | cat -n | cat -n
-[?2004l     1	     1	     1	Hello World
-[?2004h[01;31m#?[00;39m echo \c
-[?2004lIllegal escape character 'c'
-[?2004h[01;31m#?[00;39m echo "\c"
-[?2004lIllegal escape character 'c'
-[?2004h[01;31m#?[00;39m echo "hi
-[?2004lUnterminated quote
-[?2004h[01;31m#?[00;39m echo "|1|2|3|" | sed -e "s/[0-9]//g"
-[?2004l||||
-[?2004h[01;31m#?[00;39m printf "=%s=\n" one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twenty-one twenty-two twenty-three twenty-four|wc -l
-[?2004l24
-[?2004h[01;31m#?[00;39m printf"+%s"one"two"three
-[?2004l+one+two+three[?2004h[01;31m#?[00;39m 
-[?2004l[?2004h[01;31m#?[00;39m echo > file1 >file2
-[?2004lMultiple redirection
-[?2004h[01;31m#?[00;39m cat <
-[?2004lExpect filename after redirection
-[?2004h[01;31m#?[00;39m cat | cat | cat >
-[?2004lExpect filename after redirection
-[?2004h[01;31m#?[00;39m grep | 
-[?2004lNo command specified
-[?2004h[01;31m#?[00;39m | grep
-[?2004lNo command specified
-[?2004h[01;31m#?[00;39m echo || grep
-[?2004lNo command specified
-[?2004h[01;31m#?[00;39m echo \<\|\> | cat
-[?2004l<|>
-[?2004h[01;31m#?[00;39m echo hello\|grep ell
-[?2004lhello|grep ell
-[?2004h[01;31m#?[00;39m exit
-[?2004l
