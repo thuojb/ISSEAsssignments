@@ -1,0 +1,9 @@
+output.txt
+parse.o
+pipeline.o
+plaidsh
+plaidsh_test.log
+plaidsh.o
+ps_test
+ps_test.o
+tokenize.0
